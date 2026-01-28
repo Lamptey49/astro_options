@@ -1,0 +1,38 @@
+.card {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 16px;
+}
+
+.value {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.plan-card {
+    background: linear-gradient(135deg, #0f172a, #020617);
+    padding: 20px;
+    border-radius: 18px;
+}
+
+.glass {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(10px);
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    background: #020617;
+    border-radius: 8px;
+}
+
+.btn-primary {
+    background: #2563eb;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+}
+
+.badge.success { color: #22c55e; }
+.badge.pending { color: #facc15; }

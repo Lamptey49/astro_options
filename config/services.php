@@ -34,5 +34,10 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'flutterwave' => [
+        'public_key' => env('FLUTTERWAVE_PUBLIC_KEY'),
+        'secret_key' => env('ydH8j35RcSJFb2ayKkVRcRkjNJkOo3HX'),
+        'encryption_key' => env('UbbCiv/Zg5OhYGLFcwKSLpFRtgpwqBmfaftfhIdHy34='),
+    ],
 
 ];

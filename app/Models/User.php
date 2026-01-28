@@ -18,9 +18,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+       'name','email','password','balance','role','status','is_admin'
     ];
 
     /**
@@ -30,7 +28,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
+        
     ];
 
     /**
@@ -45,4 +43,23 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+     public function investments()
+    {
+        return $this->hasMany(Investment::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+    public function isAdmin(): bool
+    {
+        return $this->is_admin === 1;
+    }
+    public function isActive(): bool
+    {
+        return $this->is_active === 1;
+    }
+ 
+
 }

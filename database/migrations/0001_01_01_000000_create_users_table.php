@@ -15,12 +15,17 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
+            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_active')->default(true);
+            $table->decimal('balance',12,2)->default(0);
+            $table->decimal('demo_balance', 12, 2)->default(10000);
+            $table->enum('role',['user','admin'])->default('user');
+            $table->enum('status',['active','suspended'])->default('active');
+             $table->string('mode')->default('demo');
             $table->timestamps();
         });
-
+      
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
