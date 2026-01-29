@@ -282,7 +282,7 @@ public function close(Trade $trade)
 
     $pnl = $trade->side === 'buy'
         ? ($price - $trade->entry_price) * $trade->amount
-        : ($trade->entry_price - $price) * $trade->amount;
+        : ($trade->entry_price - $trade->entry_price) * $trade->amount;
 
     $trade->update([
         'exit_price' => $price,
@@ -291,12 +291,17 @@ public function close(Trade $trade)
         'closed_at' => now()
     ]);
 
-    // CREDIT / DEBIT BALANCE
-    $wallet = Wallet::where('user_id', $trade->user_id)
-        ->where('mode', $trade->mode)
-        ->first();
-
-    $wallet->increment('balance', $pnl);
+    // Credit PnL back to user's balance
+    $user = $trade->user;
+    $balanceField = $trade->mode === 'live' ? 'balance' : 'demo_balance';
+    
+    // Add initial amount back (trade is closed)
+    $user->increment($balanceField, $trade->amount);
+    
+    // Add PnL profit (if positive)
+    if ($pnl > 0) {
+        $user->increment($balanceField, $pnl);
+    }
 
     return response()->json(['success' => true]);
 }
